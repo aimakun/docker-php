@@ -14,6 +14,7 @@ RUN apk update && \
     docker-php-ext-install -j${NPROC} gd zip mcrypt pdo_mysql && \
     apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
-RUN usermod -u 1000 www-data
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
+RUN apk --no-cache add shadow && usermod -u 1000 www-data
 
 WORKDIR /usr/local/apache2/htdocs
